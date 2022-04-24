@@ -7,9 +7,9 @@ library(tidyverse)
 
 
 # load in data 
-data<-fread("./project/volume/data/raw/data_1.csv")
+data<-fread("./project/volume/data/raw/clean_data.csv")
 
-# we are not supposed to know the party of the individuals so we should hide this
+# drop column Q3, ID, and target variable (Q3 has a different scale that may intefer PCA & feature importance score proved to be low)
 ID<-data$ID
 data$ID<-NULL
 data$Q18a <- NULL
@@ -22,14 +22,15 @@ pca<-prcomp(data)
 # look at the percent variance explained by each pca
 screeplot(pca)
 
-# look at the rotation of the variables on the PCs
-pca
-
-# PC1: 2, 10, 11, 13, 20, 22, 25, PC2:1, 24
-
 # see the values of the scree plot in a table 
 summary(pca)
 
-# see a biplot of the first 2 PCs
-biplot(pca)
+# look at the rotation of the variables on the PCs
+pca
+
+
+
+
+
+
 
